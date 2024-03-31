@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <div class="col-md-6 offset-md-3">
+  <div class="card">
+
+    <div class="card-header">Authentication</div>
+    <div class="text-bg-danger">{{errMessage}}</div>
+    <div class="card-body">
+      <form [formGroup]="formLogin" (ngSubmit)="login()">
+       <div class="mb-3">
+         <label class="form-label">userName</label>
+         <input type="text" class="form-control" formControlName="userName">
+       </div>
+        <div class="mb-3">
+         <label class="form-label">password</label>
+         <input type="password" class="form-control" formControlName="password">
+        </div>
+        <div class="  text-center">
+          <button  class="btn btn-primary ms-4 mt-2" type="submit">login</button>
+          <button  class="btn btn-dark ms-4 mt-2" >sign-Up</button>
+        </div>
+
+
+
+
+      </form>
+    </div>
+  </div>
+  </div>
+
+</div>

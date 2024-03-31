@@ -1,0 +1,59 @@
+
+<div class="container">
+
+  <ng-template #errors >
+    <div class="text-bg-danger">{{errMessage}}</div>
+  </ng-template>
+
+  <div *ngIf="errMessage" class="text-bg-danger">{{errMessage}}</div>
+
+<div *ngIf="authenticateService.hasRole('ADMIN')">
+  <button routerLink="/admin/new-product" class="btn btn-outline-info" ><i class="bi bi-plus-square-fill"></i></button> add new product
+</div>
+
+
+  <div class="card-body">
+
+    <br>
+    <form [formGroup]="searchFormGroup" (ngSubmit)="handleSearchPageProduct()">
+      <div class="input-group">
+        <label class="input-group-text">keyword</label>
+        <input type="text" class="form-control" formControlName="keyword">
+        <button class="btn btn-info"><i class="bi bi-search"></i></button>
+
+      </div>
+    </form>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Id</th><th>Name</th><th>Price</th><th>Promo </th><th  ></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let p of products">
+        <td>{{p.id}}</td>
+        <td>{{p.name}}</td>
+        <td>{{p.price}}</td>
+        <td   ><i *ngIf="p.promotion" class="bi bi-heart-fill"></i></td>
+        <td *ngIf="authenticateService.hasRole('ADMIN')"><button (click)="handlePromotion(p)" [ngClass]="p.promotion==true?'btn btn-success':'btn btn-danger'">
+          <span *ngIf="p.promotion==true">promo ON</span>
+          <span *ngIf="p.promotion==false">promo OFF</span>
+        </button></td>
+        <td *ngIf="authenticateService.hasRole('ADMIN')"><button class="btn btn-danger" (click)="deleteProduct(p)" ><i class="bi bi-trash-fill"></i></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <ul class="nav nav-pills " >
+      <li *ngFor="let item of [].constructor(this.totalPages);let i= index">
+        <button  (click)="navigateToPage(i)"
+                [ngClass]="i==this.currentPage?'btn-info':'btn-outline-info'"
+                class="btn ms-1 mt-1">{{i}}</button>
+      </li>
+    </ul>
+
+  </div>
+
+</div>
+
