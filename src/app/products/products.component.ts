@@ -70,6 +70,15 @@ this.handleAllProductPage();
 
       });
 
+    if (this.currentAction == "all") {
+      this.handleAllProductPage();
+    }
+
+    if (this.currentAction == "search") {
+
+      this.handleSearchPageProduct();
+    }
+
 
   }}
 
@@ -79,12 +88,12 @@ this.handleAllProductPage();
  })
   }
 
-  handleSearchProduct(){
-  let keyword = this.searchFormGroup.value.keyword;
-  this.prodService.SearchProduct(keyword).subscribe(data=>{
-    this.products=data;
-  })
-}
+//   handleSearchProduct(){
+//   let keyword = this.searchFormGroup.value.keyword;
+//   this.prodService.SearchProduct(keyword).subscribe(data=>{
+//     this.products=data;
+//   })
+// }
   handleSearchPageProduct(){
     let keyword = this.searchFormGroup.value.keyword;
     //this.currentPage=0;

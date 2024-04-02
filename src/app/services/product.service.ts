@@ -27,7 +27,7 @@ else return of([...this.products]);
 
   getPageProduct(page :number,size:number):Observable<PageProduct>{
     let index=page*size;
-    let totalPages=~~this.products.length/size;
+    let totalPages=~~(this.products.length/size);
     if(this.products.length % size !=0){
       totalPages++;
     }
@@ -48,17 +48,17 @@ public deleteProductFromBackend(id:String):Observable<boolean>{
 
   }
 
-  SearchProduct(keyword:any) :Observable<Product[]>{
-    let produc = this.products.filter(p=>p.name.includes(keyword));
-    return of(produc);
-
-  }
+  // SearchProduct(keyword:any) :Observable<Product[]>{
+  //   let produc = this.products.filter(p=>p.name.includes(keyword));
+  //   return of(produc);
+  //
+  // }
   SearchPageProduct(keyword:any,page:number,size:number) :Observable<PageProduct>{
 
     let produc = this.products.filter(p=>p.name.includes(keyword));
     let index=page*size;
 
-    let totalPages=~~produc.length/size;
+    let totalPages=~~(produc.length/size);
     if(produc.length % size !=0)
       totalPages++;
 
@@ -67,6 +67,12 @@ public deleteProductFromBackend(id:String):Observable<boolean>{
     return of({page:page,size:size,totalPages:totalPages,products:productSearchPage});
 
   }
+  addProduct(product :Product):Observable<Product>{
+    product.id=UUID.UUID();
+    this.products.push(product);
+    return of(product);
+  }
+
 }
 
 
