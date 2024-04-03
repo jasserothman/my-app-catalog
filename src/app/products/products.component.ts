@@ -5,6 +5,7 @@ import {error} from "@angular/compiler-cli/src/transformers/util";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AuthenticationService} from "../services/authentication.service";
 import {AppUser} from "../model/AppUser";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -26,7 +27,8 @@ export class ProductsComponent implements OnInit{
 
 constructor(private  prodService : ProductService,
             private fb :FormBuilder,
-            public authenticateService:AuthenticationService ) {}
+            public authenticateService:AuthenticationService,
+            private route:Router) {}
 
   ngOnInit(): void {
   this.searchFormGroup=this.fb.group({
@@ -119,4 +121,14 @@ this.handleAllProductPage();
     }
 
 
-  }}
+  }
+
+  editProduct(id:String) {
+  this.prodService.findProductById(id).subscribe({
+    next:(data)=>{
+      this.route.navigateByUrl("/admin/edit-product");
+    }
+  })
+
+  }
+}

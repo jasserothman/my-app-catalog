@@ -6,6 +6,7 @@ import {LoginComponent} from "./login/login.component";
 import {AdminTemplateComponent} from "./admin-template/admin-template.component";
 import {authenticationGuardGuard} from "./guards/authentication-guard.guard";
 import {NewProductComponent} from "./new-product/new-product.component";
+import {EditProductComponent} from "./edit-product/edit-product.component";
 
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
     children :[
       {path:"products",component:ProductsComponent},
       {path:"customers",component:CustomersComponent},
-      {path:"new-product",component:NewProductComponent}
+      {path:"new-product",component:NewProductComponent},
+      {path:"edit-product",component:EditProductComponent}
 
     ]},
 

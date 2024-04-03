@@ -26,7 +26,7 @@
     <table class="table">
       <thead>
       <tr>
-        <th>Id</th><th>Name</th><th>Price</th><th>Promo </th><th  ></th>
+        <th>Id</th><th>Name</th><th>Price</th><th>Promo </th><th></th>
       </tr>
       </thead>
       <tbody>
@@ -39,6 +39,7 @@
           <span *ngIf="p.promotion==true">promo ON</span>
           <span *ngIf="p.promotion==false">promo OFF</span>
         </button></td>
+        <td *ngIf="authenticateService.hasRole('ADMIN')"><button class="btn btn-primary" (click)="editProduct(p.id)" ><i class="bi bi-pencil-square"></i></button></td>
         <td *ngIf="authenticateService.hasRole('ADMIN')"><button class="btn btn-danger" (click)="deleteProduct(p)" ><i class="bi bi-trash-fill"></i></button>
         </td>
       </tr>

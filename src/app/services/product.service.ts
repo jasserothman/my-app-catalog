@@ -8,6 +8,7 @@ import {UUID} from "angular2-uuid";
 })
 export class ProductService {
 products! :Array<Product>;
+productUp!:Product;
   constructor() {
     this.products=[];
     for (let i = 0; i < 10; i++) {
@@ -71,6 +72,20 @@ public deleteProductFromBackend(id:String):Observable<boolean>{
     product.id=UUID.UUID();
     this.products.push(product);
     return of(product);
+  }
+  findProductById(id:String):Observable<Product>{
+    let resultPro=this.products.find(p=>p.id==id);
+    if(resultPro!=undefined){
+      this.productUp=resultPro;
+      return of (resultPro);
+    }
+    else return throwError(()=>{new Error('not found')})
+
+  }
+
+  updateProduct(product:Product):Observable<Product>{
+    this.products.push(product);
+    return of(product)
   }
 
 }
