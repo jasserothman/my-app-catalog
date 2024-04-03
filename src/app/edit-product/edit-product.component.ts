@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {ProductService} from "../services/product.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Product} from "../model/Product";
 
 @Component({
   selector: 'app-edit-product',
@@ -9,16 +10,31 @@ import {Router} from "@angular/router";
   styleUrl: './edit-product.component.css'
 })
 export class EditProductComponent implements OnInit{
+
+  productId!:String;
+  product!:any;
   formProduct!:FormGroup;
-  constructor(private fb:FormBuilder,private productService :ProductService,private route:Router) {
+
+  constructor(private fb:FormBuilder,private productService :ProductService,private route:Router,
+              aRoute:ActivatedRoute) {
+    this.productId=aRoute.snapshot.params['id'];
 
   }
 
   ngOnInit(): void {
+
+    this.productService.findProductById(this.productId).subscribe({
+      next:(data)=>{
+      this.product=data;
+      },
+      error(err){
+        console.log(err)
+      }
+    })
     this.formProduct=this.fb.group({
-      name:this.fb.control(this.productService.productUp.name,[Validators.required,Validators.minLength(4)]),
-      price:this.fb.control(this.productService.productUp.price,[Validators.required,Validators.min(200)]),
-      promotion:this.fb.control(this.productService.productUp.promotion,[Validators.required])
+      name:this.fb.control(this.product.name,[Validators.required,Validators.minLength(4)]),
+      price:this.fb.control(this.product.price,[Validators.required,Validators.min(200)]),
+      promotion:this.fb.control(this.product.promotion,[Validators.required])
     })
   }
 

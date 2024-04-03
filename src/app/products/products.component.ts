@@ -123,12 +123,11 @@ this.handleAllProductPage();
 
   }
 
-  editProduct(id:String) {
-  this.prodService.findProductById(id).subscribe({
-    next:(data)=>{
-      this.route.navigateByUrl("/admin/edit-product");
-    }
-  })
+  editProduct(p:Product) {
 
-  }
+      this.route.navigateByUrl("/admin/edit-product/"+p.id);
+    }
+
+
+
 }
