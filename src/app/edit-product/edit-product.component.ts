@@ -15,7 +15,7 @@ export class EditProductComponent implements OnInit{
   product!:any;
   formProduct!:FormGroup;
 
-  constructor(private fb:FormBuilder,private productService :ProductService,private route:Router,
+  constructor(private fb:FormBuilder,public productService :ProductService,private route:Router,
               aRoute:ActivatedRoute) {
     this.productId=aRoute.snapshot.params['id'];
 
@@ -40,6 +40,7 @@ export class EditProductComponent implements OnInit{
 
   editProduct() {
     let p=this.formProduct.value;
+    p.id=this.product.id;
     this.productService.updateProduct(p).subscribe({
       next:(data)=>{
         alert("product updated sucess")
@@ -52,15 +53,5 @@ export class EditProductComponent implements OnInit{
 
   }
 
-  getErrorMessage(fildName: string, error: ValidationErrors) {
-    console.log(error);
-    if(error['required']){
-      return fildName +"is required"
-    }else if(error['minlength']){
-      return fildName+" should have at least"+error['minlength']['requiredLength']+"Characters";
-    }else if(error['min']){
-      return fildName+" min value should be "+error['min']['min'] ;
-    }
-    else return "";
-  }
+
 }

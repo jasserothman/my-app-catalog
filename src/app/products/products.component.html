@@ -7,9 +7,11 @@
 
   <div *ngIf="errMessage" class="text-bg-danger">{{errMessage}}</div>
 
-<div *ngIf="authenticateService.hasRole('ADMIN')">
-  <button routerLink="/admin/new-product" class="btn btn-outline-info" ><i class="bi bi-plus-square-fill"></i></button> add new product
-</div>
+  <div *ngIf="authenticateService.hasRole('ADMIN')" class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+    <button routerLink="/admin/products" class="btn btn-outline-info"  type="button" class="btn btn-outline-primary">get all products</button>
+    <button routerLink="/admin/new-product" class="btn btn-outline-info"  type="button" class="btn btn-outline-primary">add new product</button>
+
+  </div>
 
 
   <div class="card-body">

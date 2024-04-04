@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable, of, throwError} from "rxjs";
 import {PageProduct, Product} from "../model/Product";
 import {UUID} from "angular2-uuid";
+import {ValidationErrors} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -68,6 +69,18 @@ public deleteProductFromBackend(id:String):Observable<boolean>{
     return of({page:page,size:size,totalPages:totalPages,products:productSearchPage});
 
   }
+
+  getErrorMessage(fildName: string, error: ValidationErrors) {
+    console.log(error);
+    if(error['required']){
+      return fildName +"is required"
+    }else if(error['minlength']){
+      return fildName+" should have at least"+error['minlength']['requiredLength']+"Characters";
+    }else if(error['min']){
+      return fildName+" min value should be "+error['min']['min'] ;
+    }
+    else return "";
+  }
   addProduct(product :Product):Observable<Product>{
     product.id=UUID.UUID();
     this.products.push(product);
@@ -84,7 +97,7 @@ public deleteProductFromBackend(id:String):Observable<boolean>{
   }
 
   updateProduct(product:Product):Observable<Product>{
-    this.products.push(product);
+    this.products=this.products.map(p=>(p.id==product.id)?product:p);
     return of(product)
   }
 

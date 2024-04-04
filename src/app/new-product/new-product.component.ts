@@ -12,7 +12,7 @@ import {throwError} from "rxjs";
 })
 export class NewProductComponent  implements OnInit{
   formProduct!:FormGroup;
-  constructor(private fb:FormBuilder,private productService :ProductService,private route:Router) {
+  constructor(private fb:FormBuilder,public productService :ProductService,private route:Router) {
 
   }
 
@@ -39,15 +39,5 @@ export class NewProductComponent  implements OnInit{
 
   }
 
-  getErrorMessage(fildName: string, error: ValidationErrors) {
-    console.log(error);
-    if(error['required']){
-  return fildName +"is required"
-    }else if(error['minlength']){
-  return fildName+" should have at least"+error['minlength']['requiredLength']+"Characters";
-    }else if(error['min']){
-      return fildName+" min value should be "+error['min']['min'] ;
-    }
-    else return "";
-  }
+
 }

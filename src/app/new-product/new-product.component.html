@@ -12,7 +12,7 @@
           <input type="text" class="form-control" formControlName="name">
           <small *ngIf="formProduct.controls['name'].errors&&formProduct.controls['name'].touched"
           class="text-bg-danger">
-        {{getErrorMessage('Name',formProduct.controls['name'].errors)}}
+        {{productService.getErrorMessage('Name',formProduct.controls['name'].errors)}}
           </small>
 
         </div>
@@ -21,7 +21,7 @@
           <input type="text" class="form-control" formControlName="price">
           <small *ngIf="formProduct.controls['price'].errors&&formProduct.controls['price'].touched"
                  class="text-bg-danger">
-            {{getErrorMessage('Price',formProduct.controls['price'].errors)}}
+            {{productService.getErrorMessage('Price',formProduct.controls['price'].errors)}}
           </small>
         </div>
         <div class=" mb-3">
