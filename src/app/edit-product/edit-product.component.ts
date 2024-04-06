@@ -34,7 +34,8 @@ export class EditProductComponent implements OnInit{
     this.formProduct=this.fb.group({
       name:this.fb.control(this.product.name,[Validators.required,Validators.minLength(4)]),
       price:this.fb.control(this.product.price,[Validators.required,Validators.min(200)]),
-      promotion:this.fb.control(this.product.promotion,[Validators.required])
+      promotion:this.fb.control(this.product.promotion,[Validators.required]),
+      selected:this.fb.control(this.product.selected,[Validators.required])
     })
   }
 

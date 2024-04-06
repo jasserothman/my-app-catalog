@@ -20,7 +20,8 @@ export class NewProductComponent  implements OnInit{
     this.formProduct=this.fb.group({
       name:this.fb.control("",[Validators.required,Validators.minLength(4)]),
       price:this.fb.control(0,[Validators.required,Validators.min(200)]),
-      promotion:this.fb.control(false,[Validators.required])
+      promotion:this.fb.control(false,[Validators.required]),
+      selected:this.fb.control(false,[Validators.required])
     })
   }
 

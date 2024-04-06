@@ -25,7 +25,7 @@ export class ProductsComponent implements OnInit{
 
 
 
-constructor(private  prodService : ProductService,
+constructor(public  prodService : ProductService,
             private fb :FormBuilder,
             public authenticateService:AuthenticationService,
             private route:Router) {}
@@ -100,7 +100,7 @@ this.handleAllProductPage();
     let keyword = this.searchFormGroup.value.keyword;
     //this.currentPage=0;
 
-    this.currentAction="search";
+    this.currentAction="promo";
 
     this.prodService.SearchPageProduct(keyword,this.currentPage,this.sizePage)
       .subscribe((data)=>{
@@ -119,6 +119,10 @@ this.handleAllProductPage();
 
       this.handleSearchPageProduct();
     }
+    if (this.currentAction == "promo") {
+
+      this.handlePromotionProduct();
+    }
 
 
   }
@@ -128,6 +132,20 @@ this.handleAllProductPage();
       this.route.navigateByUrl("/admin/edit-product/"+p.id);
     }
 
+handlePromotionProduct(){
+  this.currentAction="search"
+this.prodService.getAllProductInPromtion(this.currentPage,this.sizePage).subscribe({
+  next:(data)=>{
+    this.products=data.products;
+    this.totalPages=data.totalPages;
+  },
+  error:(err)=>{
+    console.log(err)
+  }
+})
+}
 
-
+  selectProduct(p:Product) {
+  p.selected=true;
+  }
 }

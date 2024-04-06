@@ -3,6 +3,7 @@ export interface Product{
   name:String;
   price:number;
   promotion:boolean;
+  selected:boolean;
 }
 //pour la pagination
 export interface PageProduct{
