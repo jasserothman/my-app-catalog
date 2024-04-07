@@ -101,7 +101,12 @@ this.handleAllProductPage();
 // }
   handleSearchPageProduct(){
     let keyword = this.searchFormGroup.value.keyword;
-    //this.currentPage=0;
+
+  if(this.searchFormGroup.value!=null){
+    this.currentPage=0;
+
+  }
+
     this.currentAction="search";
 
     this.prodService.SearchPageProduct(keyword,this.currentPage,this.sizePage)
