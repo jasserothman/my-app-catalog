@@ -102,7 +102,7 @@ this.handleAllProductPage();
   handleSearchPageProduct(){
     let keyword = this.searchFormGroup.value.keyword;
     //this.currentPage=0;
-    this.currentAction="promo";
+    this.currentAction="search";
 
     this.prodService.SearchPageProduct(keyword,this.currentPage,this.sizePage)
       .subscribe((data)=>{
@@ -133,7 +133,7 @@ this.handleAllProductPage();
     }
 
 handlePromotionProduct(){
-  this.currentAction="search"
+  this.currentAction="promo"
 this.prodService.getAllProductInPromtion(this.currentPage,this.sizePage).subscribe({
   next:(data)=>{
     this.products=data.products;
