@@ -1,1 +1,20 @@
 <p>customers works!</p>
+<div class="container">
+  <div class="text-center mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <input type="checkbox" name="list_name" value="m1" (change)="checkUncheckAll($event)"/> <strong>Select/ Unselect All</strong>
+          </li>
+        </ul>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let item of checklist">
+            <input type="checkbox" [checked]="item.isSelected" name="list_name" value="{{item.id}}"/>
+            {{item.value}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

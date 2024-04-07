@@ -21,7 +21,8 @@ export class ProductsComponent implements OnInit{
   sizePage:number=5;
   totalPages!:number;
   currentAction:String="all";
-
+  allProdS:boolean=false;
+  etaSelect:boolean=true;
 
 
 
@@ -32,9 +33,11 @@ constructor(public  prodService : ProductService,
 
   ngOnInit(): void {
   this.searchFormGroup=this.fb.group({
-    keyword :this.fb.control(null)
+    keyword :this.fb.control(null),
+    selectAll:this.fb.control(false)
   });
 this.handleAllProductPage();
+
 
 
 
@@ -111,6 +114,7 @@ this.handleAllProductPage();
 
   navigateToPage(i:number) {
     this.currentPage = i;
+
     if (this.currentAction == "all") {
       this.handleAllProductPage();
     }
@@ -146,6 +150,18 @@ this.prodService.getAllProductInPromtion(this.currentPage,this.sizePage).subscri
 }
 
   selectProduct(p:Product) {
-  p.selected=true;
+  p.selected=!p.selected;
   }
+
+
+  checkUncheckAll(evt:any) {
+    this.products.forEach((p:any) => p.selected = evt.target.checked)
+
+
+
+    }
+
+
+
+
 }
