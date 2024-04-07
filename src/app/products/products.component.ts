@@ -101,11 +101,8 @@ this.handleAllProductPage();
 // }
   handleSearchPageProduct(){
     let keyword = this.searchFormGroup.value.keyword;
-
-  if(this.searchFormGroup.value!=null){
     this.currentPage=0;
 
-  }
 
     this.currentAction="search";
 
@@ -114,6 +111,20 @@ this.handleAllProductPage();
       this.products=data.products;
       this.totalPages=data.totalPages;
     })
+  }
+
+  handleSearchPageProductIndex(){
+    let keyword = this.searchFormGroup.value.keyword;
+
+
+
+    this.currentAction="search";
+
+    this.prodService.SearchPageProduct(keyword,this.currentPage,this.sizePage)
+      .subscribe((data)=>{
+        this.products=data.products;
+        this.totalPages=data.totalPages;
+      })
   }
 
   navigateToPage(i:number) {
@@ -125,7 +136,7 @@ this.handleAllProductPage();
 
     if (this.currentAction == "search") {
 
-      this.handleSearchPageProduct();
+      this.handleSearchPageProductIndex();
     }
     if (this.currentAction == "promo") {
 
