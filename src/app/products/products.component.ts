@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../services/product.service";
 import {Product} from "../model/Product";
-import {error} from "@angular/compiler-cli/src/transformers/util";
+
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AuthenticationService} from "../services/authentication.service";
-import {AppUser} from "../model/AppUser";
+
 import {Router} from "@angular/router";
 
 
@@ -52,7 +52,7 @@ this.handleAllProductPage();
   //   })
   // }
   handleAllProductPage(){
-
+    this.searchFormGroup.reset();
     this.currentAction="all";
     this.prodService.getPageProduct(this.currentPage,this.sizePage).subscribe(
     (data)=>{
@@ -102,7 +102,6 @@ this.handleAllProductPage();
   handleSearchPageProduct(){
     let keyword = this.searchFormGroup.value.keyword;
     //this.currentPage=0;
-
     this.currentAction="promo";
 
     this.prodService.SearchPageProduct(keyword,this.currentPage,this.sizePage)
@@ -127,12 +126,9 @@ this.handleAllProductPage();
 
       this.handlePromotionProduct();
     }
-
-
   }
 
   editProduct(p:Product) {
-
       this.route.navigateByUrl("/admin/edit-product/"+p.id);
     }
 
@@ -153,13 +149,9 @@ this.prodService.getAllProductInPromtion(this.currentPage,this.sizePage).subscri
   p.selected=!p.selected;
   }
 
-
   checkUncheckAll(evt:any) {
     this.products.forEach((p:any) => p.selected = evt.target.checked)
-
-
-
-    }
+}
 
 
 
